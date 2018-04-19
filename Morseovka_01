@@ -4,6 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ AUTOR
+   Adam Michálek, Tomáš Olejník
+ DATUM
+   Duben 2018
+ POPIS
+   Překladač Morseovy abecedy
+ KÓDOVÁNÍ
+   UTF-8
+*/
+
 namespace Projekt_morseovka
 {
     class Program
