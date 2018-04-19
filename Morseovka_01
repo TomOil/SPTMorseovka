@@ -1,0 +1,174 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Projekt_morseovka
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //Program morseovka
+            Console.WriteLine("Vítej v programu Morseovka 1.0");
+            for (int i = 0; i < 30; i++)
+            {
+                Console.Write("-");
+            }
+            Console.WriteLine("");
+            while (true)//Nekonečný cyklus, který zajištuje ze po skončení programu se program vrátí zpátky na začátek
+            {
+                char volba; //inicializace proměnných
+                int n;
+                int numb = 1;
+                char[] pole = new char[20];
+
+                Dictionary<char, string> morseovka = new Dictionary<char, string>(); // Vytvoření slovníku, do kterého uložíme znak abecedy a k tomu ekvivalentní překlad v morseově abecedě. V praxi to potom funguje tak, že při znalosti klíče (písmen) můžeme zavolat hodnotu (vyjádření v morseově abecedě)
+                morseovka.Add('A', ".-");
+                morseovka.Add('B', "-...");
+                morseovka.Add('C', "-.-.");
+                morseovka.Add('D', "-..");
+                morseovka.Add('E', ".");
+                morseovka.Add('F', "..-.");
+                morseovka.Add('G', "--.");
+                morseovka.Add('H', ".");
+                morseovka.Add('I', "..");
+                morseovka.Add('J', ".---");
+                morseovka.Add('K', "-.-");
+                morseovka.Add('L', ".-..");
+                morseovka.Add('M', "--");
+                morseovka.Add('N', "-.");
+                morseovka.Add('O', "---");
+                morseovka.Add('P', ".--.");
+                morseovka.Add('Q', "--.-");
+                morseovka.Add('R', ".-.");
+                morseovka.Add('S', "...");
+                morseovka.Add('T', "-");
+                morseovka.Add('U', "..-");
+                morseovka.Add('V', "...-");
+                morseovka.Add('W', ".--");
+                morseovka.Add('X', "-..-");
+                morseovka.Add('Y', "-.--");
+                morseovka.Add('Z', "--..");
+
+                morseovka.Add('a', ".-");
+                morseovka.Add('b', "-...");
+                morseovka.Add('c', "-.-.");
+                morseovka.Add('d', "-..");
+                morseovka.Add('e', ".");
+                morseovka.Add('f', "..-.");
+                morseovka.Add('g', "--.");
+                morseovka.Add('h', ".");
+                morseovka.Add('i', "..");
+                morseovka.Add('j', ".---");
+                morseovka.Add('k', "-.-");
+                morseovka.Add('l', ".-..");
+                morseovka.Add('m', "--");
+                morseovka.Add('n', "-.");
+                morseovka.Add('o', "---");
+                morseovka.Add('p', ".--.");
+                morseovka.Add('q', "--.-");
+                morseovka.Add('r', ".-.");
+                morseovka.Add('s', "...");
+                morseovka.Add('t', "-");
+                morseovka.Add('u', "..-");
+                morseovka.Add('v', "...-");
+                morseovka.Add('w', ".--");
+                morseovka.Add('x', "-..-");
+                morseovka.Add('y', "-.--");
+                morseovka.Add('z', "--..");
+
+                string[] veta = new string[100];
+
+                Console.WriteLine("\n1) Převedení do Morseovy abecedy"); // Menu programu, které je dělané přes switch
+                Console.WriteLine("2) Převedení z Morseovy abecedy");
+                Console.WriteLine("3) Konec programu");
+                Console.WriteLine("");
+                Console.WriteLine("Zadejte volbu:");
+                volba = Console.ReadKey().KeyChar;
+
+                switch (volba)
+                {
+                    case '1':
+                        Console.WriteLine("\nZadejte řetězec znaků, který má být převeden do Morseovy abecedy"); //Volba 1 je překlad z abecedy do morseovy abecedy
+                        string retezec = Console.ReadLine(); //Zavolání vstupního řetězce
+                        char y; // Pomocná proměnná
+                        for (int i = 0; i < retezec.Length; i++) //Cyklus, kterým rozdělíme řetězec na jednotlivé znaky (písmena)
+                        {
+                            y = retezec[i]; //Převední písmen do pole
+                            Console.WriteLine("\n{0} -> {1}", y, morseovka[y]); //Přiřazení a výpis jednotlivých písmen a k nim ekvivalentní překlad v morseově abecedě
+                        }
+                        continue;
+                    case '2':
+                        Console.WriteLine("\nZadejte pocet písmen, které chcete převést z morseovy abecedy");
+                        n = int.Parse(Console.ReadLine());
+                        for (int i = 0; i < n; i++)
+                        {
+                            Console.WriteLine("Zadejte znak č.{0}:", numb++);
+                            string retezec1 = Console.ReadLine();
+
+                            if (morseovka.ContainsValue(retezec1))
+                            {
+                                var klice = from entry in morseovka
+                                            where entry.Value == retezec1
+                                            select entry.Key;
+
+                                foreach (var key in klice)
+                                {
+                                    Console.WriteLine(key);
+                                    pole[i] = key;
+
+                                }
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Špatně zadaný znak morseovy abecedy");
+                            }
+                        }
+                        Console.WriteLine("");
+                        Console.WriteLine("Převedený text:");
+                        for (int i = 0; i < n; i++)
+                        {
+                            Console.Write("{0}", pole[i]);
+                        }
+
+                        continue;
+
+                    case '3':
+                        Console.WriteLine("Konec programu");
+                        break;
+
+                    default:
+                        Console.WriteLine("\nŠpatný znak");
+                        continue;
+                }
+
+                Console.ReadLine();
+            }
+        }
+
+    }
+}
+
+
+
+
+
+
+/*
+                  string retezec = Console.ReadLine();
+                  char y;
+                  for (int i = 0; i < retezec.Length; i++)
+                  {
+                      y = retezec[i];
+
+                      if ((y = 'A') <= (y = 'Z'))
+                      {
+                          Console.WriteLine("{0} ",)
+                      }
+                 }
+
+  */
