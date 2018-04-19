@@ -102,20 +102,20 @@ namespace Projekt_morseovka
                         }
                         continue;
                     case '2':
-                        Console.WriteLine("\nZadejte pocet písmen, které chcete převést z morseovy abecedy");
-                        n = int.Parse(Console.ReadLine());
-                        for (int i = 0; i < n; i++)
+                        Console.WriteLine("\nZadejte pocet písmen, které chcete převést z morseovy abecedy");//Volba 2 je převod z morseovy abecedy do normální abecedy
+                        n = int.Parse(Console.ReadLine()); //Inicialziace proměnné počet písmen, který chci převést do morseovy abecedy
+                        for (int i = 0; i < n; i++) //Cyklus od 0 do zadaného počtu čísel
                         {
                             Console.WriteLine("Zadejte znak č.{0}:", numb++);
-                            string retezec1 = Console.ReadLine();
+                            string retezec1 = Console.ReadLine(); //Inicializace proměnné pro zadání znaku morseovy abecedy
 
-                            if (morseovka.ContainsValue(retezec1))
+                            if (morseovka.ContainsValue(retezec1)) //Pokud slovník morseovka obsahuje retezec, který jsme zadali v předchozím kroku tak se provede tělo podmínky
                             {
-                                var klice = from entry in morseovka
-                                            where entry.Value == retezec1
+                                var klice = from entry in morseovka // Inicializace pomocné proměnné a vstup do slovníku morseovka
+                                            where entry.Value == retezec1 //Pokud vstupní hodnota je shodná s řetězcen, který jsem zadali tak dojde k výběru příslušného klíče, tedy znaku abecedy
                                             select entry.Key;
 
-                                foreach (var key in klice)
+                                foreach (var key in klice) // Výpis jednotlivých znaků abecedy pomocí cyklu foreach, který projede každý prvek v poli a nakonec uložení všech písmen do dalšího pole, aby mohlo dojít k vypsání celého slova 
                                 {
                                     Console.WriteLine(key);
                                     pole[i] = key;
@@ -123,25 +123,25 @@ namespace Projekt_morseovka
                                 }
 
                             }
-                            else
+                            else //Testovací podmínka
                             {
                                 Console.WriteLine("Špatně zadaný znak morseovy abecedy");
                             }
                         }
                         Console.WriteLine("");
                         Console.WriteLine("Převedený text:");
-                        for (int i = 0; i < n; i++)
+                        for (int i = 0; i < n; i++) //Zde je výpis celého slova pomoc pole
                         {
                             Console.Write("{0}", pole[i]);
                         }
 
                         continue;
 
-                    case '3':
+                    case '3': // Case 3 je jednoduché ukončení programu pomocí break
                         Console.WriteLine("Konec programu");
                         break;
 
-                    default:
+                    default: //Pokud bude zadané něco jiného než 1,2,3 tak to vypíš chybové hlašení
                         Console.WriteLine("\nŠpatný znak");
                         continue;
                 }
