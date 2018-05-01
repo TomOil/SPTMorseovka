@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Projekt_morseovka
 {
-    class Program
+
+    public class Morseovka
     {
-        static void Main(string[] args)
+        public void Mor()
         {
-            
 
             ///Program morseovka
             Console.WriteLine("Vítej v programu Morseovka 1.0");
@@ -26,7 +26,7 @@ namespace Projekt_morseovka
                 int n;
                 int numb = 1;
                 char[] pole = new char[20];
-    
+
 
                 Dictionary<char, string> morseovka = new Dictionary<char, string>(); // Vytvoření slovníku, do kterého uložíme znak abecedy a k tomu ekvivalentní překlad v morseově abecedě. V praxi to potom funguje tak, že při znalosti klíče (písmen) můžeme zavolat hodnotu (vyjádření v morseově abecedě)
                 morseovka.Add('A', ".-");
@@ -115,7 +115,7 @@ namespace Projekt_morseovka
                         continue;
                     case '2':
                         Console.WriteLine("\nZadejte pocet písmen, které chcete převést z morseovy abecedy");//Volba 2 je převod z morseovy abecedy do normální abecedy
-                         //Inicialziace proměnné počet písmen, který chci převést do morseovy abecedy
+                                                                                                             //Inicialziace proměnné počet písmen, který chci převést do morseovy abecedy
                         while (!int.TryParse(Console.ReadLine(), out n))
                             Console.WriteLine("Neplatné číslo, zadejte prosím znovu:");
                         for (int i = 0; i < n; i++) //Cyklus od 0 do zadaného počtu čísel
@@ -123,7 +123,7 @@ namespace Projekt_morseovka
                             Console.WriteLine("Zadejte znak č.{0}:", numb++);
                             string retezec1 = Console.ReadLine(); //Inicializace proměnné pro zadání znaku morseovy abecedy
                             bool result = retezec1.All(c => Char.IsLetterOrDigit(c) || c == '-' || c == '.');
-                            if(result == true)
+                            if (result == true)
 
                             {
                                 if (morseovka.ContainsValue(retezec1)) //Pokud slovník morseovka obsahuje retezec, který jsme zadali v předchozím kroku tak se provede tělo podmínky
@@ -143,7 +143,7 @@ namespace Projekt_morseovka
                                 else //Testovací podmínka
                                 {
                                     Console.WriteLine("Špatně zadaný znak morseovy abecedy");
-                                    break ;
+                                    break;
                                 }
                             }
 
@@ -172,6 +172,17 @@ namespace Projekt_morseovka
 
                 Console.ReadLine();
             }
+
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Morseovka a = new Morseovka();
+            a.Mor();
+            Console.ReadLine();
+            
         }
 
     }
@@ -197,4 +208,5 @@ namespace Projekt_morseovka
                  }
 
   */
+
 
