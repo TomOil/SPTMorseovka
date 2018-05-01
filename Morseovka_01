@@ -11,6 +11,7 @@ namespace Projekt_morseovka
     {
         static void Main(string[] args)
         {
+            
 
             ///Program morseovka
             Console.WriteLine("Vítej v programu Morseovka 1.0");
@@ -181,6 +182,7 @@ namespace Projekt_morseovka
 
 
 
+
 /*
                   string retezec = Console.ReadLine();
                   char y;
@@ -195,3 +197,4 @@ namespace Projekt_morseovka
                  }
 
   */
+
