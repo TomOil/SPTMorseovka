@@ -1,46 +1,33 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*
- AUTOR
-   Adam Michálek, Tomáš Olejník
- DATUM
-   Duben 2018
- POPIS
-   Překladač Morseovy abecedy
- KÓDOVÁNÍ
-   UTF-8
-*/
-
 namespace Projekt_morseovka
 {
-    //Program morseovka
     class Program
     {
         static void Main(string[] args)
         {
 
-            
+            ///Program morseovka
             Console.WriteLine("Vítej v programu Morseovka 1.0");
             for (int i = 0; i < 30; i++)
             {
                 Console.Write("-");
             }
             Console.WriteLine("");
-            //Nekonečný cyklus, který zajištuje ze po skončení programu se program vrátí zpátky na začátek
-            while (true)
+            while (true)///Nekonečný cyklus, který zajištuje ze po skončení programu se program vrátí zpátky na začátek
             {
-                //inicializace proměnných
-                char volba;
+                char volba; ///inicializace proměnných
                 int n;
                 int numb = 1;
                 char[] pole = new char[20];
+    
 
-                // Vytvoření slovníku, do kterého uložíme znak abecedy a k tomu ekvivalentní překlad v morseově abecedě. V praxi to potom funguje tak, že při znalosti klíče (písmen) můžeme zavolat hodnotu (vyjádření v morseově abecedě)
-                Dictionary<char, string> morseovka = new Dictionary<char, string>(); 
+                Dictionary<char, string> morseovka = new Dictionary<char, string>(); // Vytvoření slovníku, do kterého uložíme znak abecedy a k tomu ekvivalentní překlad v morseově abecedě. V praxi to potom funguje tak, že při znalosti klíče (písmen) můžeme zavolat hodnotu (vyjádření v morseově abecedě)
                 morseovka.Add('A', ".-");
                 morseovka.Add('B', "-...");
                 morseovka.Add('C', "-.-.");
@@ -97,8 +84,7 @@ namespace Projekt_morseovka
 
                 string[] veta = new string[100];
 
-                // Menu programu, které je dělané přes switch
-                Console.WriteLine("\n1) Převedení do Morseovy abecedy"); 
+                Console.WriteLine("\n1) Převedení do Morseovy abecedy"); // Menu programu, které je dělané přes switch
                 Console.WriteLine("2) Převedení z Morseovy abecedy");
                 Console.WriteLine("3) Konec programu");
                 Console.WriteLine("");
@@ -114,34 +100,55 @@ namespace Projekt_morseovka
                         for (int i = 0; i < retezec.Length; i++) //Cyklus, kterým rozdělíme řetězec na jednotlivé znaky (písmena)
                         {
                             y = retezec[i]; //Převední písmen do pole
-                            Console.WriteLine("\n{0} -> {1}", y, morseovka[y]); //Přiřazení a výpis jednotlivých písmen a k nim ekvivalentní překlad v morseově abecedě
+                            if (retezec.Contains("1") || retezec.Contains("2") || retezec.Contains("3") || retezec.Contains("4") || retezec.Contains("5") || retezec.Contains("6") || retezec.Contains("7") || retezec.Contains("8") || retezec.Contains("9") || retezec.Contains("0"))
+                            {
+                                Console.WriteLine("Musí být zadány jenom znaky abecedy");
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\n{0} -> {1}", y, morseovka[y]); //Přiřazení a výpis jednotlivých písmen a k nim ekvivalentní překlad v morseově abecedě
+                            }
                         }
                         continue;
                     case '2':
                         Console.WriteLine("\nZadejte pocet písmen, které chcete převést z morseovy abecedy");//Volba 2 je převod z morseovy abecedy do normální abecedy
-                        n = int.Parse(Console.ReadLine()); //Inicialziace proměnné počet písmen, který chci převést do morseovy abecedy
+                         //Inicialziace proměnné počet písmen, který chci převést do morseovy abecedy
+                        while (!int.TryParse(Console.ReadLine(), out n))
+                            Console.WriteLine("Neplatné číslo, zadejte prosím znovu:");
                         for (int i = 0; i < n; i++) //Cyklus od 0 do zadaného počtu čísel
                         {
                             Console.WriteLine("Zadejte znak č.{0}:", numb++);
                             string retezec1 = Console.ReadLine(); //Inicializace proměnné pro zadání znaku morseovy abecedy
+                            bool result = retezec1.All(c => Char.IsLetterOrDigit(c) || c == '-' || c == '.');
+                            if(result == true)
 
-                            if (morseovka.ContainsValue(retezec1)) //Pokud slovník morseovka obsahuje retezec, který jsme zadali v předchozím kroku tak se provede tělo podmínky
                             {
-                                var klice = from entry in morseovka // Inicializace pomocné proměnné a vstup do slovníku morseovka
-                                            where entry.Value == retezec1 //Pokud vstupní hodnota je shodná s řetězcen, který jsem zadali tak dojde k výběru příslušného klíče, tedy znaku abecedy
-                                            select entry.Key;
-
-                                foreach (var key in klice) // Výpis jednotlivých znaků abecedy pomocí cyklu foreach, který projede každý prvek v poli a nakonec uložení všech písmen do dalšího pole, aby mohlo dojít k vypsání celého slova 
+                                if (morseovka.ContainsValue(retezec1)) //Pokud slovník morseovka obsahuje retezec, který jsme zadali v předchozím kroku tak se provede tělo podmínky
                                 {
-                                    Console.WriteLine(key);
-                                    pole[i] = key;
+                                    var klice = from entry in morseovka // Inicializace pomocné proměnné a vstup do slovníku morseovka
+                                                where entry.Value == retezec1 //Pokud vstupní hodnota je shodná s řetězcen, který jsem zadali tak dojde k výběru příslušného klíče, tedy znaku abecedy
+                                                select entry.Key;
+
+                                    foreach (var key in klice) // Výpis jednotlivých znaků abecedy pomocí cyklu foreach, který projede každý prvek v poli a nakonec uložení všech písmen do dalšího pole, aby mohlo dojít k vypsání celého slova 
+                                    {
+                                        Console.WriteLine(key);
+                                        pole[i] = key;
+
+                                    }
 
                                 }
-
+                                else //Testovací podmínka
+                                {
+                                    Console.WriteLine("Špatně zadaný znak morseovy abecedy");
+                                    break ;
+                                }
                             }
-                            else //Testovací podmínka
+
+                            else
                             {
-                                Console.WriteLine("Špatně zadaný znak morseovy abecedy");
+                                Console.WriteLine("Spatný znak");
                             }
                         }
                         Console.WriteLine("");
@@ -154,7 +161,7 @@ namespace Projekt_morseovka
                         continue;
 
                     case '3': // Case 3 je jednoduché ukončení programu pomocí break
-                        Console.WriteLine("Konec programu");
+                        Console.WriteLine("\nKonec programu");
                         break;
 
                     default: //Pokud bude zadané něco jiného než 1,2,3 tak to vypíš chybové hlašení
